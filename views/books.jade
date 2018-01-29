@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title Little Library
+    body
+        h1 This is #{title}
+        
+
+        ul
+            each book, i in bookList
+                li
+                    a(href="#book.pageUrl") #{book.title}
+                    a(href='http://#{book.pageUrl}')
+                        img(src='#{book.imageUrl}')
+            else
+                li sorry, no books!
+
+
