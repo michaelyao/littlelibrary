@@ -17,7 +17,7 @@ connection.connect( function(err) {
     }
     else {
 
-        connection.query("Select * from fact_book_add", function (err, rows, fields) {
+        connection.query("Select * from fact_book_add limit 5", function (err, rows, fields) {
             console.log("connect to db ")
             if (!err) {
                 console.log("Result ", rows);
