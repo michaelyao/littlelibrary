@@ -10,10 +10,15 @@ router.get('/', function(req, res) {
 /* GET home page. */
 router.get('/books', function(req, res) {
     console.log("Getting all books");
-    BookService.getAllBooks(function(bookList){
-        console.log(JSON.stringify(bookList));
-        console.log(bookList.length);
-        res.render('books', { title: 'Book List', "bookList": bookList });
+    BookService.getAllBooks(function(bookList) {
+        if (bookList != null) {
+            console.log(JSON.stringify(bookList));
+            console.log(bookList.length);
+            res.render('books', {title: 'Book List', "bookList": bookList});
+        }
+        else{
+            res.render("books", {title: 'Book List', "bookList": []});
+        }
     })
 
 });

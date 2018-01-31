@@ -11,10 +11,19 @@ var Book = {
             var results = inMemDb.find({});
             console.log("Get all books " + JSON.stringify(results));
             callback(results);
-            return;
         }
         else{
-            return db.query("Select * from littlefreelib.fact_book_add", callback);
+            db.query("Select * from littlefreelib.fact_book_add limit 50", function (err, rows, fields) {
+                console.log("connect to db ")
+                if (!err) {
+                    console.log("Result ", rows.length);
+                    callback(rows);
+                }
+                else {
+                    console.log("error in query");
+                    callback(null);
+                }
+            })
         }
 
     },
@@ -24,10 +33,9 @@ var Book = {
             var results = inMemDb.findOne({"ID" : id});
             results["source"] = "InMemDB"
             callback(results);
-            return;
         }
         else{
-            return db.query("select * from littlefreelib.fact_book_add where Library_id =?",[id],callback);
+            db.query("select * from littlefreelib.fact_book_add where Library_id =?",[id],callback);
         }
 
     },
@@ -44,7 +52,7 @@ var Book = {
             }
             else {
                 console.log("db db state: " + db.state);
-                return db.query("Insert into book values(?,?,?)", [book.Id, Book.Title, book.Status], callback);
+                db.query("Insert into book values(?,?,?)", [book.Id, Book.Title, book.Status], callback);
             }
         }
         catch(e){
