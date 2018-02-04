@@ -9,7 +9,7 @@ router.post('/book', function(req, res, next) {
     console.log("add book router");
     console.log(JSON.stringify(req.body));
     var bookInfo = {};
-    if( "title" in req.body_){
+    if( "title" in req.body){
         bookInfo['Book_name'] = req.body["title"];
     }
     if("imageUrl" in req.body){
