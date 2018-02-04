@@ -9,9 +9,9 @@ html
         ul
             each book, i in bookList
                 li
-                    a(href="#{book.pageUrl}") #{book.title}
+                    a(href="#{book.pageUrl}") #{book.Scanned_code}
                     a(href='http://#{book.pageUrl}')
-                        img(src='#{book.imageUrl}')
+                        img(src='#{book.image_url}')
             else
                 li sorry, no books!
 
