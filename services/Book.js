@@ -14,7 +14,9 @@ var Book = {
         }
         else{
             db.query("Select * from littlefreelib.fact_book_add limit 50", function (err, rows, fields) {
+
                 console.log("connect to db ")
+                console.log(JSON.stringify(fields))
                 if (!err) {
                     console.log("Result ", rows.length);
                     callback(rows);
@@ -52,7 +54,9 @@ var Book = {
             }
             else {
                 console.log("db db state: " + db.state);
-                db.query("Insert into book values(?,?,?)", [book.Id, Book.Title, book.Status], callback);
+                console.log(JSON.stringify((book)));
+                db.query("Insert into littlefreelib.fact_book_add (Scanned_code, Book_name, image_url, book_url, code_type, ASIN ) values(?,?,?,?,?,?)",
+                    [book.Scanned_code, book.Book_name, book.image_url,book.book_url, book.code_type,book.ASIN],  callback);
             }
         }
         catch(e){
@@ -77,7 +81,7 @@ var Book = {
         else{
         }
         console.log("update a book "+ id + "  " + JSON.stringify(book));
-        //return db.query("update book set Title=?,Status=? where Id=?",[book.Title,book.Status,id],callback);
+        //return db.query("update book set name=?,image_url=?,book_url=?,code_type=?,ASIN=? where Scanned_code=?",[book.Title,book.Status,id],callback);
         callback();
     }
 

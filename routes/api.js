@@ -11,6 +11,7 @@ router.post('/book', function(req, res, next) {
     var bookInfo = {};
     if( "title" in req.body){
         bookInfo['Book_name'] = req.body["title"];
+        console.log("add book name")
     }
     if("imageUrl" in req.body){
         bookInfo['image_url'] = req.body["imageUrl"];
@@ -30,7 +31,7 @@ router.post('/book', function(req, res, next) {
     }
 
 
-    Book.addBook(req.body,function(err,count){
+    Book.addBook(bookInfo,function(err,count){
         if(err)
         {
             res.json(err);
